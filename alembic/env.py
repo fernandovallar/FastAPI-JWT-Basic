@@ -48,8 +48,8 @@ def run_migrations_offline() -> None:
     context.configure(
         url=url,
         compare_type=True,
-        target_metadata=target_metadata,
         literal_binds=True,
+        target_metadata=target_metadata,
         dialect_opts={"paramstyle": "named"},
     )
 

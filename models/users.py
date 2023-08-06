@@ -11,8 +11,10 @@ from sqlalchemy import (
 from db_initializer import Base
 import bcrypt
 import os 
+import jwt
+import settings
 
-SECRET_KEY = os.getenv("SECRET_KEY")
+
 class User(Base):
     """Models a user table"""
     __tablename__ = "users"
@@ -37,15 +39,17 @@ class User(Base):
         return bcrypt.hashpw(password.encode(), bcrypt.gensalt())
 
     def validate_password(self, password) -> bool:
+        print(f"\n\n\n\n\n SECRET KEY: {settings.SECRET_KEY} \n\n\n\n\n\n\n")
         """Confirms password validity"""
         return {
             "access_token": jwt.encode(
                 {"full_name": self.full_name, "email": self.email},
-                "ApplicationSecretKey"
+                settings.SECRET_KEY
             )
         }
 
     def generate_token(self) -> dict:
+        print(f"\n\n\n\n\n SECRET KEY: {settings.SECRET_KEY} \n\n\n\n\n\n\n")
         """Generate access token for user"""
         return {
             "access_token": jwt.encode(

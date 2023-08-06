@@ -1,4 +1,7 @@
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Database url configuration
 DATABASE_URL = "postgresql+psycopg2://{username}:{password}@{host}:{port}/{db_name}".format(
@@ -8,3 +11,4 @@ DATABASE_URL = "postgresql+psycopg2://{username}:{password}@{host}:{port}/{db_na
     username=os.getenv("POSTGRES_USER"),
     password=os.getenv("POSTGRES_PASSWORD"),
 )
+SECRET_KEY = os.getenv("SECRET_KEY")
