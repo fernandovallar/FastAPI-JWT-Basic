@@ -7,6 +7,8 @@ from models import users as user_model
 from schemas.users import CreateUserSchema, UserSchema
 from services.db import users as user_db_services
 
+app = fastapi.FastAPI()
+
 @app.post('/signup', response_model=UserSchema)
 def signup(
     payload: CreateUserSchema = Body(), 
@@ -56,4 +58,3 @@ def login(
     return user.generate_token()
 
 
-app = fastapi.FastAPI()
